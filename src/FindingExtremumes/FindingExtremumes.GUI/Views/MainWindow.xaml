@@ -1,0 +1,115 @@
+﻿<Window x:Class="FindingExtremumes.GUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FindingExtremumes.GUI"
+        mc:Ignorable="d"
+        Title="Finding Extremume" Height="500" Width="800"
+        ResizeMode="NoResize">
+    <Grid Margin="7">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="0 0 0 1">
+            <TextBlock FontSize="26">Finding extremumes with numeric methods</TextBlock>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="0.6*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel 
+                        Margin="0 0 5 10" 
+                        Orientation="Vertical">
+                        <TextBlock FontSize="22">Formula</TextBlock>
+                        <TextBox FontSize="22" Text="{Binding Formula}"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel 
+                        Margin="0 0 5 10" 
+                        Orientation="Vertical">
+                        <TextBlock FontSize="22">Epsillion</TextBlock>
+                        <TextBox FontSize="22" Text="{Binding Epsillion}"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel 
+                        Margin="0 0 5 10" 
+                        Orientation="Vertical">
+                        <TextBlock FontSize="22">Delta</TextBlock>
+                        <TextBox FontSize="22" Text="{Binding Delta}"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel 
+                        Margin="0 0 5 10"
+                        Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <TextBlock FontSize="22" HorizontalAlignment="Stretch">Start</TextBlock>
+                            <TextBlock FontSize="22" Text="{Binding Start}" HorizontalAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <Slider 
+                            Value="{Binding Start}"
+                            IsSnapToTickEnabled="True" 
+                            Minimum="-500" 
+                            Maximum="500" 
+                            TickPlacement="BottomRight" 
+                            AutoToolTipPlacement="BottomRight" 
+                            AutoToolTipPrecision="2" 
+                            FontSize="22"
+                        />
+                    </StackPanel>
+
+                    <StackPanel Margin="0 0 5 10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <TextBlock FontSize="22" HorizontalAlignment="Stretch">End</TextBlock>
+                            <TextBlock FontSize="22" Text="{Binding End}" HorizontalAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <Slider 
+                            Value="{Binding End}"
+                            IsSnapToTickEnabled="True" 
+                            Minimum="-500" 
+                            Maximum="500" 
+                            TickPlacement="BottomRight" 
+                            AutoToolTipPlacement="BottomRight" 
+                            AutoToolTipPrecision="2" 
+                            FontSize="22"
+                        />
+                    </StackPanel>
+                    <Button FontSize="22" Command="{Binding FindExtremume}">Estimate</Button>
+                </StackPanel>
+             
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="30">Result</TextBlock>
+                    <TextBlock FontSize="30" Text="{Binding Result}"></TextBlock>
+                </StackPanel>
+                <!--<ItemsControl ItemsSource="{Binding Lines2}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            --><!--<Line X1="1" Y1="1"
+                      X2="2" Y2="2"
+                      Stroke="Black" StrokeThickness="10--><!--"/>--><!--
+                            <Line X1="{Binding From.X}" Y1="{Binding From.Y}"
+                      X2="{Binding To.X}" Y2="{Binding To.Y}"
+                      Stroke="Red" StrokeThickness="3"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>-->
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</Window>

@@ -328,3 +328,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+*.csproj
+*.sln
+/src/FindingExtremumes/FindingExtremumes.Compiler/Properties
+/src/FindingExtremumes/FindingExtremumes.GUI/Properties
