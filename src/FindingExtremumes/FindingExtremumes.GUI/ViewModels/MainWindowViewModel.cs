@@ -81,7 +81,7 @@ namespace FindingExtremumes.GUI.ViewModels
             }
         }
 
-        public ICommand FindExtremume => new RelayCommand(Start_FindExtremume);
+        public ICommand FindExtremume => new RelayCommand(Start_FindExtremume, q => true);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -99,6 +99,9 @@ namespace FindingExtremumes.GUI.ViewModels
             Result = await Task.Run(() => EstimateExtremume(lambda));
         }
 
+        /// <summary>
+        /// Estimates extremume with given inputs.
+        /// </summary>
         private double EstimateExtremume(Func<double, double> lambda)
         {
             var y = 0;

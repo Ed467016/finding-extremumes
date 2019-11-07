@@ -7,8 +7,14 @@ using Microsoft.CSharp;
 
 namespace FindingExtremumes.Compiler
 {
+    /// <summary>
+    /// Used to compile string expression to function pointer.
+    /// </summary>
     public class Compiler
     {
+        /// <summary>
+        /// Shortcuts for formula expression inputs.
+        /// </summary>
         private static readonly Dictionary<string, string> _keys = new Dictionary<string, string>()
         {
             { "pow", "Math.Pow" },
@@ -26,15 +32,25 @@ namespace FindingExtremumes.Compiler
             m_parameters.ReferencedAssemblies.Add("System.dll");
         }
 
-        public async Task<CompilerResults> Compile(string code)
+        /// <summary>
+        /// Compiles string and gets assembly compiled.
+        /// </summary>
+        /// <param name="code">Code to compile.</param>
+        /// <returns>Result of compilation.</returns>
+        public Task<CompilerResults> Compile(string code)
         {
-            return await Task.Run(() =>
+            return Task.Run(() =>
             {
                 CompilerResults results = m_provider.CompileAssemblyFromSource(m_parameters, GetCode(code));
                 return results;
-            }).ConfigureAwait(false);
+            });
         }
 
+        /// <summary>
+        /// Gets function pointer from compiled assembly.
+        /// </summary>
+        /// <param name="cr">Compiled assembly.</param>
+        /// <returns>Function pointer.</returns>
         public Func<double, double> GetLambda(CompilerResults cr)
         {
             var asm = cr.CompiledAssembly.GetType("Dynamic.DynamicCode");
@@ -44,6 +60,9 @@ namespace FindingExtremumes.Compiler
             return res;
         }
 
+        /// <summary>
+        /// Used to replace shortcuts with valid C# math functions.
+        /// </summary>
         private static string[] GetCode(string code)
         {
             foreach (var key in _keys)

@@ -3,41 +3,37 @@ using System.Windows.Input;
 
 namespace FindingExtremumes.GUI.Infrastructure
 {
+    /// <summary>
+    /// Stands for command pattern. MVVM action binding mechanism.
+    /// </summary>
     public class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
-        private Func<object, bool> _canExecute;
-        private Action<object> _execute;
+        private Action<object> action;
+        private Func<object, bool> func;
 
         public RelayCommand(
-            Func<object, bool> canExecute,
-            Action<object> execute)
+            Action<object> action,
+            Func<object, bool> func)
         {
-            this._canExecute = canExecute;
-            this._execute = execute;
+            this.action = action;
+            this.func = func;
         }
 
-        public RelayCommand(Action<object> execute)
-        {
-            this._canExecute = o => true;
-            this._execute = execute;
-        }
-
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute.Invoke(parameter);
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute.Invoke(parameter);
-            RaiseCanExecuteChanged();
-        }
+        public event EventHandler CanExecuteChanged;
 
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return func(parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            this.action(parameter);
         }
     }
 }
